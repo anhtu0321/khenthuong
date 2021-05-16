@@ -42,7 +42,7 @@ Quản lý Users
                                         <select class="form-control select2-init" name="role[]" multiple>
                                             <option value=""></option>
                                             @foreach($roles as $role)
-                                                <option value="{{ $role->id }}">{{ $role->display_name }}</option>
+                                                <option value="{{ $role->id }}">{{ $role->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

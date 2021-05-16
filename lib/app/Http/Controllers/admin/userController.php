@@ -23,7 +23,12 @@ class userController extends Controller
         return view('backend.admin.user.add', compact('roles'));
     }
     function storeUser(Request $request){
-        dd($request->name);
+        $this->user->create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => $request->password,
+        ]);
+        return redirect()->route('user.list');
     }
     function editUser(){
         return view('backend.admin.user.edit');
@@ -34,4 +39,6 @@ class userController extends Controller
     function deleteUser(){
         dd('xoa user');
     }
+ 
+
 }
