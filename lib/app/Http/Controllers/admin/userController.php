@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use DB;
 class userController extends Controller
 {
     private $user;
@@ -23,11 +24,20 @@ class userController extends Controller
         return view('backend.admin.user.add', compact('roles'));
     }
     function storeUser(Request $request){
-        $this->user->create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => $request->password,
-        ]);
+        try{
+            DB::beginTransaction();
+            $users = $this->user->create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => $request->password,
+            ]);
+            $users->role()->attach($request->role);
+            DB::commit();
+        }catch(\Exception $exception){
+            DB::rollBack();
+            $exception->getMessage();
+        }
+        
         return redirect()->route('user.list');
     }
     function editUser(){
