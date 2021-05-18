@@ -4,32 +4,32 @@ Quản lý Users
 @endsection
 @section('content')
     <div class="content-wrapper">  
-        @include('backend.components.header-content',['route'=>'user.list','name'=>'User', 'key'=>'List'])
+        @include('backend.components.header-content',['route'=>'role.list','name'=>'Role', 'key'=>'List'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('user.add') }}" class="btn btn-success float-right m-2">Add</a>
+                        <a href="{{ route('role.add') }}" class="btn btn-success float-right m-2">Add</a>
                     </div>
                     <div class="col-md-12">
                         <table class="table table-light">
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
-                                    <th>Họ tên</th>
-                                    <th>Tên tài khoản</th>
+                                    <th>Tên Role</th>
+                                    <th>Tên Đầy đủ</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($roles as $role)
                                 <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $role->id }}</td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->display_name }}</td>
                                     <td>
-                                        <a href="{{ route('user.edit', ['id'=> $user->id]) }}" class="btn btn-default">Sửa</a>
-                                        <a href="{{ route('user.delete', ['id'=> $user->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
+                                        <a href="{{ route('role.edit', ['id'=> $role->id]) }}" class="btn btn-default">Sửa</a>
+                                        <a href="{{ route('role.delete', ['id'=> $role->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -39,7 +39,7 @@ Quản lý Users
                     </div>
                     <div class="col-md-12">
                         <div class="float-right">
-                            {{ $users->links() }}
+                            {{ $roles->links() }}
                         </div> 
                     </div>
                     <!-- /.col-md-12 -->

@@ -16,7 +16,7 @@ Quản lý Users
 @endsection
 @section('content')
     <div class="content-wrapper">  
-        @include('backend.components.header-content',['name'=>'User', 'key'=>'Add'])
+        @include('backend.components.header-content',['route'=>'user.list','name'=>'User', 'key'=>'Add'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

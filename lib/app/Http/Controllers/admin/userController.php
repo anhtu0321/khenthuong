@@ -15,15 +15,15 @@ class userController extends Controller
         $this->user = $user;
         $this->role = $role;
     }
-    function listUser(){
+    function list(){
         $users = $this->user->paginate(10);
         return view('backend.admin.user.list', compact('users'));
     }
-    function addUser(){
+    function add(){
         $roles = $this->role->get();
         return view('backend.admin.user.add', compact('roles'));
     }
-    function storeUser(Request $request){
+    function store(Request $request){
         try{
             DB::beginTransaction();
             $users = $this->user->create([
@@ -40,14 +40,40 @@ class userController extends Controller
         
         return redirect()->route('user.list');
     }
-    function editUser(){
-        return view('backend.admin.user.edit');
+    function edit($id){
+        $roles = $this->role->get();
+        $users = $this->user->find($id);
+        $roleOfUser = $users->role;
+        return view('backend.admin.user.edit', compact('roles','users','roleOfUser'));
     }
-    function updateUser(){
-        dd('update user');
+    function update(Request $request, $id){
+        try{
+            DB::beginTransaction();
+            if($request->password !=""){
+                $this->user->find($id)->update([
+                    'name' => $request->name,
+                    'username' => $request->username,
+                    'password' => $request->password,
+                ]); 
+            }else{
+                $this->user->find($id)->update([
+                    'name' => $request->name,
+                    'username' => $request->username,
+                ]);
+            }
+            $users = $this->user->find($id);
+            $users->role()->sync($request->role);
+            DB::commit();
+        }catch(\Exception $exception){
+            DB::rollBack();
+            $exception->getMessage();
+        }
+        
+        return redirect()->route('user.edit',['id'=>$id]);
     }
-    function deleteUser(){
-        dd('xoa user');
+    function delete($id){
+        $this->user->find($id)->Delete();
+        return redirect()-> route('user.list');
     }
  
 

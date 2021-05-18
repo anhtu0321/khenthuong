@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\softDeletes;
 class Role extends Model
 {
-    protected $guard=[];
+    use softDeletes;
+    protected $guarded=[];
 }
