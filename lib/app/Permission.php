@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    public function permissionChildren(){
+    public function permissionChildrent(){
         return $this->hasMany('App\Permission','parent_id');
     }
 }

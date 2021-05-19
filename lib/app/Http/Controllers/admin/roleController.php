@@ -5,11 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
+use App\Permission;
 class roleController extends Controller
 {
     private $role;
-    public function __construct(Role $role){
+    private $permission;
+    public function __construct(Role $role, Permission $permission){
         $this->role = $role;
+        $this->permission = $permission;
     }
     function list(){
         $roles = $this->role->paginate(10);
@@ -17,7 +20,8 @@ class roleController extends Controller
     }
     function add(){
         $roles = $this->role->get();
-        return view('backend.admin.role.add', compact('roles'));
+        $permission = $this->permission->where('parent_id',0)->get();
+        return view('backend.admin.role.add', compact('roles','permission'));
     }
     function store(Request $request){
             $roles = $this->role->create([

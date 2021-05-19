@@ -2,6 +2,9 @@
 @section('title')
 Quản lý Roles
 @endsection
+@section('js')
+    <script src="{{ asset('public/admin/role/add.js') }}"></script>
+@endsection
 @section('content')
     <div class="content-wrapper">  
         @include('backend.components.header-content',['route'=>'role.list','name'=>'Role', 'key'=>'Add'])
@@ -21,35 +24,23 @@ Quản lý Roles
                                         <label >Tên đầy đủ</label>
                                         <input class="form-control" type="text" name="display_name">
                                     </div>
-                                    <div class="card text-black col-md-6">
-
-                                        <div class="card-header bg-success">
-                                            <input type="checkbox">
-                                            Module Sản phẩm
-                                        </div>
-                                        <div class="row">
-                                            <div class="card-body col-md-3">
-                                                <input type="checkbox">
-                                                Thêm sản phẩm
+                                    <div class="row">
+                                        @foreach ($permission as $per)
+                                            <div class="card text-black col-md-6">
+                                                <div class="card-header bg-success">
+                                                    <input type="checkbox" class="checkbox-cha">
+                                                    {{ $per->name }}
+                                                </div>
+                                                <div class="row">
+                                                    @foreach ($per->permissionChildrent as $perChi)
+                                                        <div class="card-body col-md-3">
+                                                            <input type="checkbox" class="checkbox-con" name="permission_id[]" value="{{ $perChi->id }}">
+                                                            {{ $perChi->name }}
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
-      
-                                            <div class="card-body col-md-3">
-                                                <input type="checkbox">
-                                                Thêm sản phẩm
-                                            </div>
-      
-                                            <div class="card-body col-md-3">
-                                                <input type="checkbox">
-                                                Thêm sản phẩm
-                                            </div>
-      
-                                            <div class="card-body col-md-3">
-                                                <input type="checkbox">
-                                                Thêm sản phẩm
-                                            </div>
-      
-                                        </div>
-                                        
+                                        @endforeach
                                     </div>
                                     <button class="btn btn-primary" type="submit">Thêm Role</button>
                                 </form>
