@@ -13,6 +13,7 @@ Quản lý Roles
                 <div class="row">
                     <div class="container-fluid">
                         <div class="row">
+                            
                             <div class="col-md-12">
                                 <form method="post" action="{{ route('role.store') }}">
                                     @csrf
@@ -24,18 +25,29 @@ Quản lý Roles
                                         <label >Tên đầy đủ</label>
                                         <input class="form-control" type="text" name="display_name">
                                     </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="checkbox" class="checkall">
+                                            Checkall
+                                        </label>
+                                        
+                                    </div>
                                     <div class="row">
                                         @foreach ($permission as $per)
                                             <div class="card text-black col-md-6">
                                                 <div class="card-header bg-success">
-                                                    <input type="checkbox" class="checkbox-cha">
-                                                    {{ $per->name }}
+                                                    <label>
+                                                        <input type="checkbox" class="checkbox-cha">
+                                                        {{ $per->name }}
+                                                    </label>
                                                 </div>
                                                 <div class="row">
                                                     @foreach ($per->permissionChildrent as $perChi)
                                                         <div class="card-body col-md-3">
-                                                            <input type="checkbox" class="checkbox-con" name="permission_id[]" value="{{ $perChi->id }}">
-                                                            {{ $perChi->name }}
+                                                            <label>
+                                                                <input type="checkbox" class="checkbox-con" name="permission_id[]" value="{{ $perChi->id }}">
+                                                                {{ $perChi->name }}
+                                                            </label>
                                                         </div>
                                                     @endforeach
                                                 </div>

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('admin')->group(function (){
     Route::prefix('admin')->group(function () {
-        Route::get('/','adminController@getHome');
+        Route::get('/','adminController@getLogin')->name('admin.home');
+        Route::post('/','adminController@postLogin')->name('admin.postLogin');
         Route::prefix('user')->group(function(){
             Route::get('/',[
                 'as'=>'user.list',

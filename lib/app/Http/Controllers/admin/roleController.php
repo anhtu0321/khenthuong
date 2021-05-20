@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
+use DB;
 class roleController extends Controller
 {
     private $role;
@@ -24,10 +25,17 @@ class roleController extends Controller
         return view('backend.admin.role.add', compact('roles','permission'));
     }
     function store(Request $request){
+        try{
+            DB::beginTransaction();
             $roles = $this->role->create([
                 'name' => $request->name,
                 'display_name' => $request->display_name,
             ]);
+            $roles->permissions()->attach($request->permission_id);
+            DB::commit();
+        }catch(\Exception $exception){
+            DB::rollback();
+        }
         return redirect()->route('role.list');
     }
     function edit($id){

@@ -29,7 +29,7 @@ class userController extends Controller
             $users = $this->user->create([
                 'name' => $request->name,
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
             ]);
             $users->role()->attach($request->role);
             DB::commit();
@@ -53,7 +53,7 @@ class userController extends Controller
                 $this->user->find($id)->update([
                     'name' => $request->name,
                     'username' => $request->username,
-                    'password' => $request->password,
+                    'password' => bcrypt($request->password),
                 ]); 
             }else{
                 $this->user->find($id)->update([
@@ -75,6 +75,4 @@ class userController extends Controller
         $this->user->find($id)->Delete();
         return redirect()-> route('user.list');
     }
- 
-
 }

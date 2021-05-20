@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">  
-        @include('backend.components.header-content',['name'=>'Home', 'key'=>''])
+        @include('backend.components.header-content',['route'=>'admin.home','name'=>'Home', 'key'=>''])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
-    function getHome(){
-        return view('backend.home');
+    function getLogin(){
+        if(auth()->check()){
+            return view('backend.home');
+        }
+        return view('backend.login');
+    }
+    function postLogin(Request $request){
+        if(auth()->attempt([
+            'username' => $request->username, 
+            'password' => $request->password
+        ])){
+            return redirect()->to('admin');
+        }else{
+            dd($request->username);
+        }
     }
     
-    function getCategory(){
-        return view('backend.admin.category.list');
-    }
 }
