@@ -36,4 +36,14 @@ class User extends Authenticatable
      public function role(){
          return $this -> belongsToMany('App\Role','user__roles','user_id','role_id');
      }
+
+     public function kiemtra($key_code){
+         $roles = auth()->user()->role;
+         foreach($roles as $role){
+             if($role->permissions->contains('key_code',$key_code)){
+                 return true;
+             }
+         }
+         return false;
+     }
 }

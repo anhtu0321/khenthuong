@@ -9,7 +9,8 @@ Route::namespace('admin')->group(function (){
         Route::prefix('user')->group(function(){
             Route::get('/',[
                 'as'=>'user.list',
-                'uses'=>'userController@list' 
+                'uses'=>'userController@list',
+                'middleware' =>'can:list_user' 
             ]);
             Route::get('add',[
                 'as'=>'user.add',

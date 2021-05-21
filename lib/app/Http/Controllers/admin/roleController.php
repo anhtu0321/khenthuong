@@ -39,14 +39,18 @@ class roleController extends Controller
         return redirect()->route('role.list');
     }
     function edit($id){
+        $permissionParent = $this->permission->where('parent_id',0)->get();
         $roles = $this->role->find($id);
-        return view('backend.admin.role.edit', compact('roles'));
+        $permission_id = $roles->permissions;
+        return view('backend.admin.role.edit', compact('roles','permissionParent','permission_id'));
     }
     function update(Request $request, $id){
         $this->role->find($id)->update([
             'name' => $request->name,
             'display_name' => $request->display_name,
         ]); 
+        $roles = $this->role->find($id);
+        $roles->permissions()->sync($request->permission_id);
         return redirect()->route('role.edit',['id'=>$id]);
     }
     function delete($id){

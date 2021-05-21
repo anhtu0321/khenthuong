@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('list_user', function ($user) {
+            return $user->kiemtra('list_user');
+        });
     }
 }
