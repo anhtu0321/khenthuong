@@ -59,6 +59,32 @@ Route::namespace('admin')->group(function (){
                 'uses'=>'roleController@delete'
             ]);
         });
+        Route::prefix('permission')->group(function(){
+            Route::get('/',[
+                'as'=>'permission.list',
+                'uses'=>'permissionController@list' 
+            ]);
+            Route::get('add',[
+                'as'=>'permission.add',
+                'uses'=>'permissionController@add' 
+            ]);
+            Route::post('store',[
+                'as'=>'permission.store',
+                'uses'=>'permissionController@store' 
+            ]);
+            Route::get('edit/{id}',[
+                'as'=>'permission.edit',
+                'uses'=>'permissionController@edit'
+            ]);
+            Route::post('update/{id}',[
+                'as'=>'permission.update',
+                'uses'=>'permissionController@update'
+            ]);
+            Route::get('delete/{id}',[
+                'as'=>'permission.delete',
+                'uses'=>'permissionController@delete'
+            ]);
+        });
     });
 });
 
