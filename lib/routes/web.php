@@ -11,27 +11,32 @@ Route::namespace('admin')->group(function (){
             Route::get('/',[
                 'as'=>'user.list',
                 'uses'=>'userController@list',
-                'middleware' =>'can:list_user' 
+                'middleware' =>'can:user_list' 
             ]);
             Route::get('add',[
                 'as'=>'user.add',
-                'uses'=>'userController@add' 
+                'uses'=>'userController@add',
+                'middleware' =>'can:user_add' 
             ]);
             Route::post('store',[
                 'as'=>'user.store',
-                'uses'=>'userController@store' 
+                'uses'=>'userController@store',
+                'middleware' =>'can:user_add' 
             ]);
             Route::get('edit/{id}',[
                 'as'=>'user.edit',
-                'uses'=>'userController@edit'
+                'uses'=>'userController@edit',
+                'middleware' =>'can:user_edit'
             ]);
             Route::post('update/{id}',[
                 'as'=>'user.update',
-                'uses'=>'userController@update'
+                'uses'=>'userController@update',
+                'middleware' =>'can:user_edit'
             ]);
             Route::get('delete/{id}',[
                 'as'=>'user.delete',
-                'uses'=>'userController@delete'
+                'uses'=>'userController@delete',
+                'middleware' =>'can:user_delete'
             ]);
         });
         Route::prefix('role')->group(function(){

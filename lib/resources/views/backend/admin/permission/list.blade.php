@@ -16,12 +16,18 @@ Quản lý Permission
                             @foreach ($percha as $per)
                                 <div class="card text-black col-md-12">
                                     <div class="card-header bg-success">
-                                        <label>
-                                            {{ $per->name }}
-                                            <td><a href="{{ route('permission.edit', ['id'=> $per->id]) }}" class="btn btn-default">Sửa</a>
+                                        <div class="row">
+                                            <div class="col-md-6 text-left">
+                                                <label>
+                                                    <h4>{{ $per->name }}</h4>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <a href="{{ route('permission.edit', ['id'=> $per->id]) }}" class="btn btn-default">Sửa</a>
                                                 <a href="{{ route('permission.delete', ['id'=> $per->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
-                                            </td>
-                                        </label>
+                                            </div> 
+                                        </div>
+                                            
                                     </div>
                                     <div class="row">
                                         <table class="table table-light">

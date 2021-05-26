@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Services\checkGate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,8 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('list_user', function ($user) {
-            return $user->kiemtra('user_list');
-        });
+        $checkGate = new checkGate();
+        $checkGate->setGate();
     }
 }
