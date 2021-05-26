@@ -15,6 +15,9 @@
         <div class="info">
             <a href="#" class="d-block">Alexander Pierce</a>
         </div>
+        <div class="info">
+            <a href="{{ route('admin.logout') }}" class="d-block">Logout</a>
+        </div>
         </div>
 
         <!-- Sidebar Menu -->
@@ -44,7 +47,6 @@
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                     Quản lý chức năng
-                    <span class="right badge badge-danger">New</span>
                     </p>
                 </a>
             </li>

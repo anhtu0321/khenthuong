@@ -12,45 +12,54 @@ Quản lý Permission
                         <a href="{{ route('permission.add') }}" class="btn btn-success float-right m-2">Add</a>
                     </div>
                     <div class="col-md-12">
-                        <table class="table table-light">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tên permission</th>
-                                    <th>Tên Đầy đủ</th>
-                                    <th>Key Code</th>
-                                    <th>Chức năng cha</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($permissions as $permission)
-                                <tr>
-                                    <td>{{ $permission->id }}</td>
-                                    <td>{{ $permission->name }}</td>
-                                    <td>{{ $permission->display_name }}</td>
-                                    <td>{{ $permission->key_code }}</td>
-                                    <td>
-                                        @foreach($percha as $per)
-                                            @if($per->id == $permission->parent_id)
-                                                {{ $per->name }}
-                                            @endif
-                                        @endforeach
-
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('permission.edit', ['id'=> $permission->id]) }}" class="btn btn-default">Sửa</a>
-                                        <a href="{{ route('permission.delete', ['id'=> $permission->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
-                                    </td>
-                                </tr>
+                        <div class="row">
+                            @foreach ($percha as $per)
+                                <div class="card text-black col-md-12">
+                                    <div class="card-header bg-success">
+                                        <label>
+                                            {{ $per->name }}
+                                            <td><a href="{{ route('permission.edit', ['id'=> $per->id]) }}" class="btn btn-default">Sửa</a>
+                                                <a href="{{ route('permission.delete', ['id'=> $per->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
+                                            </td>
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-light">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Tên permission</th>
+                                                    <th>Tên Đầy đủ</th>
+                                                    <th>Key Code</th>
+                                                    <th>Chức năng cha</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($per->permissionChildrent as $permission)
+                                                    <tr>
+                                                        <td>{{ $permission->id }}</td>
+                                                        <td>{{ $permission->name }}</td>
+                                                        <td>{{ $permission->display_name }}</td>
+                                                        <td>{{ $permission->key_code }}</td>
+                                                        <td>{{ $per->name }}</td>
+                                                        <td>
+                                                            <a href="{{ route('permission.edit', ['id'=> $permission->id]) }}" class="btn btn-default">Sửa</a>
+                                                            <a href="{{ route('permission.delete', ['id'=> $permission->id]) }}" class="btn btn-danger" onclick="return confirm('muốn xóa thật à ?');">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             @endforeach
-                            </tbody>
-                        </table>
-
+                        </div>
+                        
                     </div>
                     <div class="col-md-12">
                         <div class="float-right">
-                            {{ $permissions->links() }}
+                            {{ $percha->links() }}
                         </div> 
                     </div>
                     <!-- /.col-md-12 -->

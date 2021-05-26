@@ -1,13 +1,10 @@
 @extends('backend.master')
 @section('title')
-Quản lý Roles
-@endsection
-@section('js')
-    <script src="{{ asset('public/admin/role/add.js') }}"></script>
+Quản lý permissions
 @endsection
 @section('content')
     <div class="content-wrapper">  
-        @include('backend.components.header-content',['route'=>'role.list','name'=>'Role', 'key'=>'Add'])
+        @include('backend.components.header-content',['route'=>'permission.list','name'=>'permission', 'key'=>'Add'])
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -15,10 +12,10 @@ Quản lý Roles
                         <div class="row">
                             
                             <div class="col-md-12">
-                                <form method="post" action="{{ route('role.store') }}">
+                                <form method="post" action="{{ route('permission.store') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <label >Tên Role</label>
+                                        <label >Tên permission</label>
                                         <input class="form-control" type="text" name="name">
                                     </div>
                                     <div class="form-group">
@@ -26,35 +23,20 @@ Quản lý Roles
                                         <input class="form-control" type="text" name="display_name">
                                     </div>
                                     <div class="form-group">
-                                        <label>
-                                            <input type="checkbox" class="checkall">
-                                            Checkall
-                                        </label>
-                                        
+                                        <label >Key Code</label>
+                                        <input class="form-control" type="text" name="key_code">
                                     </div>
-                                    <div class="row">
-                                        @foreach ($permission as $per)
-                                            <div class="card text-black col-md-6">
-                                                <div class="card-header bg-success">
-                                                    <label>
-                                                        <input type="checkbox" class="checkbox-cha">
-                                                        {{ $per->name }}
-                                                    </label>
-                                                </div>
-                                                <div class="row">
-                                                    @foreach ($per->permissionChildrent as $perChi)
-                                                        <div class="card-body col-md-3">
-                                                            <label>
-                                                                <input type="checkbox" class="checkbox-con" name="permission_id[]" value="{{ $perChi->id }}">
-                                                                {{ $perChi->name }}
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                   
+                                    <div class="form-group">
+                                        <label >Chọn chức năng cha</label>
+                                        <select name="parent_id" class="form-control">
+                                            <option value="0" selected="selected">Chọn chức năng cha</option>
+                                            @foreach($percha as $per)
+                                                <option value="{{ $per->id }}">{{ $per->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <button class="btn btn-primary" type="submit">Thêm Role</button>
+                                    <button class="btn btn-primary" type="submit">Thêm permission</button>
                                 </form>
                             </div>
                         </div>

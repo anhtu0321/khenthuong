@@ -6,6 +6,7 @@ Route::namespace('admin')->group(function (){
     Route::prefix('admin')->group(function () {
         Route::get('/','adminController@getLogin')->name('admin.home');
         Route::post('/','adminController@postLogin')->name('admin.postLogin');
+        Route::get('/logout', 'adminController@logout')->name('admin.logout');
         Route::prefix('user')->group(function(){
             Route::get('/',[
                 'as'=>'user.list',

@@ -23,5 +23,9 @@ class adminController extends Controller
             dd($request->username);
         }
     }
+    function logout(){
+        auth()->logout();
+        return redirect()->route('admin.home');
+    }
     
 }
