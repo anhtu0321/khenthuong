@@ -42,53 +42,65 @@ Route::namespace('admin')->group(function (){
         Route::prefix('role')->group(function(){
             Route::get('/',[
                 'as'=>'role.list',
-                'uses'=>'roleController@list' 
+                'uses'=>'roleController@list',
+                'middleware'=>'can:role_list' 
             ]);
             Route::get('add',[
                 'as'=>'role.add',
-                'uses'=>'roleController@add' 
+                'uses'=>'roleController@add',
+                'middleware'=>'can:role_add' 
             ]);
             Route::post('store',[
                 'as'=>'role.store',
-                'uses'=>'roleController@store' 
+                'uses'=>'roleController@store',
+                'middleware'=>'can:role_add' 
             ]);
             Route::get('edit/{id}',[
                 'as'=>'role.edit',
-                'uses'=>'roleController@edit'
+                'uses'=>'roleController@edit',
+                'middleware'=>'can:role_edit'
             ]);
             Route::post('update/{id}',[
                 'as'=>'role.update',
-                'uses'=>'roleController@update'
+                'uses'=>'roleController@update',
+                'middleware'=>'can:role_edit'
             ]);
             Route::get('delete/{id}',[
                 'as'=>'role.delete',
-                'uses'=>'roleController@delete'
+                'uses'=>'roleController@delete',
+                'middleware'=>'can:role_delete'
             ]);
         });
         Route::prefix('permission')->group(function(){
             Route::get('/',[
                 'as'=>'permission.list',
-                'uses'=>'permissionController@list' 
+                'uses'=>'permissionController@list',
+                'middleware'=>'can:permission_list',
             ]);
             Route::get('add',[
                 'as'=>'permission.add',
-                'uses'=>'permissionController@add' 
+                'uses'=>'permissionController@add', 
+                'middleware'=>'can:permission_add',
             ]);
             Route::post('store',[
                 'as'=>'permission.store',
-                'uses'=>'permissionController@store' 
+                'uses'=>'permissionController@store', 
+                'middleware'=>'can:permission_add',
             ]);
             Route::get('edit/{id}',[
                 'as'=>'permission.edit',
-                'uses'=>'permissionController@edit'
+                'uses'=>'permissionController@edit',
+                'middleware'=>'can:permission_edit',
             ]);
             Route::post('update/{id}',[
                 'as'=>'permission.update',
-                'uses'=>'permissionController@update'
+                'uses'=>'permissionController@update',
+                'middleware'=>'can:permission_edit',
             ]);
             Route::get('delete/{id}',[
                 'as'=>'permission.delete',
-                'uses'=>'permissionController@delete'
+                'uses'=>'permissionController@delete',
+                'middleware'=>'can:permission_delete',
             ]);
         });
     });
